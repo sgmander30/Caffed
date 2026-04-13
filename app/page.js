@@ -50,9 +50,10 @@ const AnnouncementBar = () => (
         ANNOUNCEMENT_ITEMS.map((item, i) => (
           <span
             key={`${repeat}-${i}`}
-            className="mx-12 font-heading text-xs uppercase tracking-widest text-brand-gold"
+            className="font-heading text-xs uppercase tracking-widest text-brand-gold"
           >
-            {item}
+            <span className="mx-10">{item}</span>
+            <span className="mx-1 text-brand-goldLight">•</span>
           </span>
         ))
       )}
