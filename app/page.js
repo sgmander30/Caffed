@@ -80,7 +80,7 @@ const Navbar = () => {
         <div className="flex flex-col items-center">
           <h1 className="m-0 p-0">
             <img
-              src="/logo.jpg"
+              src="/logonobg.png"
               alt="Caffed Protein"
               className="h-12 w-auto object-contain"
             />
@@ -246,7 +246,7 @@ const Footer = () => (
       <div>
         <div className="mb-6">
           <img
-            src="/logo.jpg"
+            src="/logonobg.png"
             alt="Caffed Protein"
             className="h-16 w-auto object-contain"
           />
