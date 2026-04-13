@@ -251,7 +251,6 @@ const Footer = () => (
         <h4 className="mb-6 font-heading text-xs tracking-widest text-white">SHOP</h4>
         <ul className="space-y-3 text-sm font-medium text-gray-400">
           <li className="cursor-pointer transition hover:text-brand-gold">Protein Bars</li>
-          <li className="cursor-pointer transition hover:text-brand-gold">Variety Packs</li>
           <li className="cursor-pointer transition hover:text-brand-gold">Subscribe & Save</li>
         </ul>
       </div>
@@ -297,7 +296,7 @@ export default function Home() {
       {/* Category Icon Row */}
       <section className="overflow-x-auto bg-brand-black py-12">
         <div className="flex min-w-max justify-center space-x-8 px-6">
-          {["Protein Bars", "Variety Pack", "Merch", "Subscribers"].map((cat) => (
+          {["Protein Bars", "Merch", "Subscribers"].map((cat) => (
             <div key={cat} className="group flex cursor-pointer flex-col items-center space-y-3">
               <div className="flex h-20 w-20 items-center justify-center rounded-full border border-brand-gold/30 transition-all duration-300 group-hover:bg-brand-gold">
                 <Bolt className="text-brand-gold group-hover:text-brand-black" />
@@ -328,34 +327,27 @@ export default function Home() {
           <h2 className="mb-2 font-heading text-4xl font-black uppercase text-white">Our Bars</h2>
           <div className="h-1 w-20 bg-brand-gold" />
         </div>
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 md:grid-cols-3">
           <ProductCard
             name="Chocolate Peanut Butter"
-            price="36.99"
+            price="34.99"
             status="Best Seller"
             img1="https://images.unsplash.com/photo-1590085011111-2f3068e820f1?auto=format&fit=crop&q=80&w=600"
             img2="https://images.unsplash.com/photo-1568241723642-94f387c93248?auto=format&fit=crop&q=80&w=600"
           />
           <ProductCard
             name="Mocha Crunch"
-            price="36.99"
+            price="34.99"
             status="Coming Soon"
             img1="https://images.unsplash.com/photo-1582176604447-aa5144675a69?auto=format&fit=crop&q=80&w=600"
             img2="https://images.unsplash.com/photo-1611703182699-35b31541a64b?auto=format&fit=crop&q=80&w=600"
           />
           <ProductCard
             name="Vanilla Espresso"
-            price="36.99"
+            price="34.99"
             status="Coming Soon"
             img1="https://images.unsplash.com/photo-1622484211148-7169ac870716?auto=format&fit=crop&q=80&w=600"
             img2="https://images.unsplash.com/photo-1582176604447-aa5144675a69?auto=format&fit=crop&q=80&w=600"
-          />
-          <ProductCard
-            name="Variety Pack"
-            price="39.99"
-            status="New"
-            img1="https://images.unsplash.com/photo-1568241723642-94f387c93248?auto=format&fit=crop&q=80&w=600"
-            img2="https://images.unsplash.com/photo-1590085011111-2f3068e820f1?auto=format&fit=crop&q=80&w=600"
           />
         </div>
       </section>
