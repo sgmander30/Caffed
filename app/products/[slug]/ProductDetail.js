@@ -2,23 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   ArrowLeft, ShoppingBag, Plus, Minus,
   CheckCircle2, Zap, Dumbbell, Leaf, Star,
 } from "lucide-react";
 import { useCart } from "../../../components/CartContext";
-import { getProductBySlug, PRODUCTS } from "../../../components/products";
+import { PRODUCTS } from "../../../components/products";
 
-export default function ProductDetail({ slug }) {
-  const product = getProductBySlug(slug);
+export default function ProductDetail({ product }) {
   const { addItem, totalItems } = useCart();
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
-
-  if (!product) return notFound();
 
   const isAvailable = product.status !== "Coming Soon";
 
@@ -80,6 +76,7 @@ export default function ProductDetail({ slug }) {
                 </span>
               )}
             </motion.div>
+            {/* Thumbnails */}
             <div className="flex gap-3">
               {product.images.map((img, i) => (
                 <button
@@ -116,7 +113,7 @@ export default function ProductDetail({ slug }) {
 
             <p className="mb-5 text-3xl font-black text-brand-gold">${product.price}</p>
 
-            {/* Quick macros */}
+            {/* Quick macro tiles */}
             <div className="mb-6 grid grid-cols-3 gap-3">
               {[
                 { icon: <Dumbbell size={18} />, val: "20g", label: "Protein" },
@@ -147,7 +144,7 @@ export default function ProductDetail({ slug }) {
               ))}
             </ul>
 
-            {/* Add to cart / Buy now */}
+            {/* Buy controls */}
             {isAvailable ? (
               <>
                 <div className="flex flex-wrap items-center gap-4">
@@ -197,13 +194,13 @@ export default function ProductDetail({ slug }) {
                 <p className="font-heading text-sm font-bold uppercase tracking-widest text-brand-gold">
                   Coming Soon
                 </p>
-                <p className="mt-1 text-xs text-gray-400">Be the first to know when this drops.</p>
+                <p className="mt-1 text-xs text-gray-400">Check back soon for this flavor.</p>
               </div>
             )}
           </div>
         </div>
 
-        {/* NUTRITION DETAILS */}
+        {/* NUTRITION + INGREDIENTS */}
         <div className="mt-20 grid gap-10 border-t border-brand-gold/10 pt-16 md:grid-cols-2">
           <div>
             <h2 className="mb-6 font-heading text-xl font-black uppercase text-white">Nutrition Facts</h2>
@@ -236,8 +233,8 @@ export default function ProductDetail({ slug }) {
         {/* OTHER FLAVORS */}
         <div className="mt-20 border-t border-brand-gold/10 pt-16">
           <h2 className="mb-8 font-heading text-xl font-black uppercase text-white">Other Flavors</h2>
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {PRODUCTS.filter((p) => p.slug !== slug).map((p) => (
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {PRODUCTS.filter((p) => p.slug !== product.slug).map((p) => (
               <Link
                 key={p.slug}
                 href={`/products/${p.slug}`}
