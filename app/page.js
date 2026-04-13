@@ -138,7 +138,7 @@ const Hero = () => {
             </span>
           </h2>
           <p className="mb-6 max-w-xs text-sm font-medium leading-snug text-brand-goldLight sm:max-w-sm sm:text-base lg:mb-7">
-            20g Protein · 100mg Caffeine · Low Sugar
+            20g Protein · 100mg Caffeine
           </p>
           <button
             type="button"
