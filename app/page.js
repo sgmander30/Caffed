@@ -102,58 +102,66 @@ const Hero = () => {
   const heroRemote = isAbsoluteImageUrl(heroSrc);
 
   return (
-  <section className="relative flex min-h-[90vh] items-center overflow-hidden pt-20">
-    <div className="absolute inset-0 bg-radial-gradient from-brand-gold/10 to-transparent opacity-50" />
-    <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 md:grid-cols-2">
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="mb-4 block font-heading text-sm tracking-[0.3em] text-brand-gold">
-          THE ORIGINAL CAFFEINATED PROTEIN BAR
-        </span>
-        <h2 className="mb-6 text-6xl font-black leading-none text-white md:text-8xl">
-          PROTEIN <br /> MEETS <br />{" "}
-          <span className="bg-gradient-to-r from-brand-gold to-brand-goldLight bg-clip-text text-transparent">
-            CAFFEINE
+    <section className="relative flex min-h-[88vh] items-center overflow-hidden pt-16 sm:pt-20">
+      <div className="absolute inset-0 bg-radial-gradient from-brand-gold/10 to-transparent opacity-50" />
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-5 sm:gap-10 sm:px-6 lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.75 }}
+          className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-5 xl:col-span-5"
+        >
+          <span className="mb-3 block font-heading text-[10px] tracking-[0.22em] text-brand-gold sm:text-xs sm:tracking-[0.28em]">
+            THE ORIGINAL CAFFEINATED PROTEIN BAR
           </span>
-        </h2>
-        <p className="mb-8 text-xl font-medium text-brand-goldLight">20g Protein · 100mg Caffeine · Low Sugar</p>
-        <button className="bg-brand-gold px-10 py-4 font-heading font-bold text-brand-black transition-transform hover:bg-brand-goldLight active:scale-95">
-          SHOP NOW
-        </button>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        className="relative mx-auto w-full max-w-sm md:max-w-md"
-      >
-        <div className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full bg-brand-gold/15 blur-[100px]" />
-        <div className="relative z-10 aspect-[3/4] w-full overflow-hidden rounded-lg shadow-[0_35px_60px_rgba(200,168,78,0.22)]">
-          {heroRemote ? (
-            <img
-              src={heroSrc}
-              alt="Two people holding Caffed Protein bars — opened bar with chocolate coating and sealed black-and-gold wrapper"
-              className="absolute inset-0 h-full w-full object-cover object-[center_35%]"
-              decoding="async"
-              fetchPriority="high"
-            />
-          ) : (
-            <Image
-              src={heroSrc}
-              alt="Two people holding Caffed Protein bars — opened bar with chocolate coating and sealed black-and-gold wrapper"
-              fill
-              className="object-cover object-[center_35%]"
-              sizes="(max-width: 768px) 100vw, 42vw"
-              priority
-            />
-          )}
-        </div>
-      </motion.div>
-    </div>
-  </section>
+          <h2 className="mb-4 max-w-[16ch] text-4xl font-black leading-[0.95] text-white sm:text-5xl sm:leading-none lg:mb-5 lg:max-w-none lg:text-5xl xl:text-6xl">
+            PROTEIN <br /> MEETS <br />{" "}
+            <span className="bg-gradient-to-r from-brand-gold to-brand-goldLight bg-clip-text text-transparent">
+              CAFFEINE
+            </span>
+          </h2>
+          <p className="mb-6 max-w-xs text-sm font-medium leading-snug text-brand-goldLight sm:max-w-sm sm:text-base lg:mb-7">
+            20g Protein · 100mg Caffeine · Low Sugar
+          </p>
+          <button
+            type="button"
+            className="w-fit bg-brand-gold px-7 py-3 font-heading text-sm font-bold text-brand-black transition-transform hover:bg-brand-goldLight active:scale-95 sm:px-9 sm:py-3.5 sm:text-base"
+          >
+            SHOP NOW
+          </button>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.85 }}
+          className="order-1 w-full lg:order-2 lg:col-span-7 xl:col-span-7"
+        >
+          <div className="relative mx-auto w-full max-w-[min(100%,420px)] lg:ml-auto lg:mr-0 lg:max-w-none">
+            <div className="pointer-events-none absolute inset-0 -z-10 scale-105 rounded-full bg-brand-gold/12 blur-[90px]" />
+            <div className="relative z-10 aspect-[3/4] w-full overflow-hidden rounded-lg shadow-[0_28px_50px_rgba(200,168,78,0.2)] sm:rounded-xl">
+              {heroRemote ? (
+                <img
+                  src={heroSrc}
+                  alt="Two people holding Caffed Protein bars — opened chocolate bar and sealed black-and-gold packaging"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              ) : (
+                <Image
+                  src={heroSrc}
+                  alt="Two people holding Caffed Protein bars — opened chocolate bar and sealed black-and-gold packaging"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  priority
+                />
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
