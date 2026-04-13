@@ -332,22 +332,22 @@ export default function Home() {
             name="Chocolate Peanut Butter"
             price="34.99"
             status="Best Seller"
-            img1="https://images.unsplash.com/photo-1590085011111-2f3068e820f1?auto=format&fit=crop&q=80&w=600"
-            img2="https://images.unsplash.com/photo-1568241723642-94f387c93248?auto=format&fit=crop&q=80&w=600"
+            img1="/products/choc-pb-box.png"
+            img2="/products/choc-pb-bar.png"
           />
           <ProductCard
             name="Rich Chocolate"
             price="34.99"
             status="Coming Soon"
-            img1="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&q=80&w=600"
-            img2="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80&w=600"
+            img1="/products/rich-choc-box.png"
+            img2="/products/rich-choc-bar.png"
           />
           <ProductCard
             name="Cinnamon"
             price="34.99"
             status="Coming Soon"
-            img1="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&q=80&w=600"
-            img2="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+            img1="/products/cinnamon-box.png"
+            img2="/products/cinnamon-bar.png"
           />
         </div>
       </section>
