@@ -336,18 +336,18 @@ export default function Home() {
             img2="https://images.unsplash.com/photo-1568241723642-94f387c93248?auto=format&fit=crop&q=80&w=600"
           />
           <ProductCard
-            name="Mocha Crunch"
+            name="Rich Chocolate"
             price="34.99"
             status="Coming Soon"
-            img1="https://images.unsplash.com/photo-1582176604447-aa5144675a69?auto=format&fit=crop&q=80&w=600"
-            img2="https://images.unsplash.com/photo-1611703182699-35b31541a64b?auto=format&fit=crop&q=80&w=600"
+            img1="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&q=80&w=600"
+            img2="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&q=80&w=600"
           />
           <ProductCard
-            name="Vanilla Espresso"
+            name="Cinnamon"
             price="34.99"
             status="Coming Soon"
-            img1="https://images.unsplash.com/photo-1622484211148-7169ac870716?auto=format&fit=crop&q=80&w=600"
-            img2="https://images.unsplash.com/photo-1582176604447-aa5144675a69?auto=format&fit=crop&q=80&w=600"
+            img1="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&q=80&w=600"
+            img2="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
           />
         </div>
       </section>
