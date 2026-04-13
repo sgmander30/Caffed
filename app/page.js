@@ -35,15 +35,27 @@ function isAbsoluteImageUrl(src) {
 
 // --- COMPONENTS ---
 
+const ANNOUNCEMENT_ITEMS = [
+  "Free Shipping On Orders Over $50",
+  "20G Protein",
+  "100mg Caffeine",
+  "Low Sugar",
+  "Fuel Your Grind",
+];
+
 const AnnouncementBar = () => (
   <div className="overflow-hidden whitespace-nowrap border-b border-brand-gold/20 bg-brand-black py-2">
     <div className="flex animate-marquee">
-      {[...Array(4)].map((_, i) => (
-        <span key={i} className="mx-8 font-heading text-xs uppercase tracking-widest text-brand-gold">
-          Free shipping on orders over $50 • 100mg caffeine per bar • 20g protein, low sugar • Fuel your
-          grind
-        </span>
-      ))}
+      {[...Array(4)].map((_, repeat) =>
+        ANNOUNCEMENT_ITEMS.map((item, i) => (
+          <span
+            key={`${repeat}-${i}`}
+            className="mx-12 font-heading text-xs uppercase tracking-widest text-brand-gold"
+          >
+            {item}
+          </span>
+        ))
+      )}
     </div>
   </div>
 );
