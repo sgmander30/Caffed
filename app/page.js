@@ -314,34 +314,6 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* Category Icon Row */}
-      <section className="overflow-x-auto bg-brand-black py-12">
-        <div className="flex min-w-max justify-center space-x-8 px-6">
-          {["Protein Bars", "Merch", "Subscribers"].map((cat) => (
-            <div key={cat} className="group flex cursor-pointer flex-col items-center space-y-3">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-brand-gold/30 transition-all duration-300 group-hover:bg-brand-gold">
-                <Bolt className="text-brand-gold group-hover:text-brand-black" />
-              </div>
-              <span className="font-heading text-[10px] uppercase tracking-widest text-white">{cat}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Marquee Divider */}
-      <div className="overflow-hidden border-y border-brand-black bg-brand-gold py-3">
-        <div className="flex animate-marquee-fast">
-          {[...Array(6)].map((_, i) => (
-            <span
-              key={i}
-              className="mx-10 whitespace-nowrap text-2xl font-black uppercase tracking-tighter text-brand-black"
-            >
-              20G PROTEIN · 100MG CAFFEINE · LOW SUGAR · FUEL YOUR GRIND
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* Product Grid */}
       <section className="mx-auto max-w-7xl px-6 py-24">
         <div className="mb-16 flex flex-col items-center">
@@ -372,6 +344,20 @@ export default function Home() {
           />
         </div>
       </section>
+
+      {/* Marquee Divider */}
+      <div className="overflow-hidden border-y border-brand-black bg-brand-gold py-3">
+        <div className="flex animate-marquee-fast">
+          {[...Array(6)].map((_, i) => (
+            <span
+              key={i}
+              className="mx-10 whitespace-nowrap text-2xl font-black uppercase tracking-tighter text-brand-black"
+            >
+              20G PROTEIN · 100MG CAFFEINE · LOW SUGAR · FUEL YOUR GRIND
+            </span>
+          ))}
+        </div>
+      </div>
 
       <StatsStrip />
 
