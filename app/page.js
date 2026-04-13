@@ -19,8 +19,19 @@ import {
 
 import CaffedLogo from "../components/CaffedLogo";
 
-/** Swap this file for your official lifestyle shot (portrait ~3:4 works best). */
-const HERO_IMAGE = "/hero-caffed.jpg";
+/**
+ * Hero photo: replace `public/hero-caffed.jpg` with your file, or set env
+ * NEXT_PUBLIC_HERO_IMAGE=https://... to a hosted copy (no code change).
+ */
+function getHeroImageSrc() {
+  const fromEnv = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim();
+  if (fromEnv) return fromEnv;
+  return "/hero-caffed.jpg";
+}
+
+function isAbsoluteImageUrl(src) {
+  return /^https?:\/\//i.test(src);
+}
 
 // --- COMPONENTS ---
 
@@ -86,7 +97,11 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => (
+const Hero = () => {
+  const heroSrc = getHeroImageSrc();
+  const heroRemote = isAbsoluteImageUrl(heroSrc);
+
+  return (
   <section className="relative flex min-h-[90vh] items-center overflow-hidden pt-20">
     <div className="absolute inset-0 bg-radial-gradient from-brand-gold/10 to-transparent opacity-50" />
     <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 md:grid-cols-2">
@@ -117,19 +132,30 @@ const Hero = () => (
       >
         <div className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full bg-brand-gold/15 blur-[100px]" />
         <div className="relative z-10 aspect-[3/4] w-full overflow-hidden rounded-lg shadow-[0_35px_60px_rgba(200,168,78,0.22)]">
-          <Image
-            src={HERO_IMAGE}
-            alt="Two people holding Caffed Protein bars — opened bar and sealed packaging"
-            fill
-            className="object-cover object-[center_30%]"
-            sizes="(max-width: 768px) 100vw, 42vw"
-            priority
-          />
+          {heroRemote ? (
+            <img
+              src={heroSrc}
+              alt="Two people holding Caffed Protein bars — opened bar with chocolate coating and sealed black-and-gold wrapper"
+              className="absolute inset-0 h-full w-full object-cover object-[center_35%]"
+              decoding="async"
+              fetchPriority="high"
+            />
+          ) : (
+            <Image
+              src={heroSrc}
+              alt="Two people holding Caffed Protein bars — opened bar with chocolate coating and sealed black-and-gold wrapper"
+              fill
+              className="object-cover object-[center_35%]"
+              sizes="(max-width: 768px) 100vw, 42vw"
+              priority
+            />
+          )}
         </div>
       </motion.div>
     </div>
   </section>
-);
+  );
+};
 
 const ProductCard = ({ name, price, status, img1, img2 }) => {
   const [hover, setHover] = useState(false);
