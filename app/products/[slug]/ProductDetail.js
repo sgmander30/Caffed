@@ -26,7 +26,7 @@ export default function ProductDetail({ product }) {
 
   const handleBuyNow = () => {
     for (let i = 0; i < qty; i++) addItem(product);
-    window.location.href = "/cart";
+    window.location.href = "/checkout";
   };
 
   return (
