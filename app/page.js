@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ShoppingBag,
@@ -17,6 +18,9 @@ import {
 } from "lucide-react";
 
 import CaffedLogo from "../components/CaffedLogo";
+
+/** Swap this file for your official lifestyle shot (portrait ~3:4 works best). */
+const HERO_IMAGE = "/hero-caffed.jpg";
 
 // --- COMPONENTS ---
 
@@ -109,14 +113,19 @@ const Hero = () => (
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
-        className="relative"
+        className="relative mx-auto w-full max-w-sm md:max-w-md"
       >
-        <div className="absolute inset-0 rounded-full bg-brand-gold/20 blur-[120px]" />
-        <img
-          src="https://images.unsplash.com/photo-1611703182699-35b31541a64b?q=80&w=1000&auto=format&fit=crop"
-          alt="Caffed Protein Bar Box and Single Bar"
-          className="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(200,168,78,0.3)]"
-        />
+        <div className="pointer-events-none absolute inset-0 -z-10 scale-110 rounded-full bg-brand-gold/15 blur-[100px]" />
+        <div className="relative z-10 aspect-[3/4] w-full overflow-hidden rounded-lg shadow-[0_35px_60px_rgba(200,168,78,0.22)]">
+          <Image
+            src={HERO_IMAGE}
+            alt="Two people holding Caffed Protein bars — opened bar and sealed packaging"
+            fill
+            className="object-cover object-[center_30%]"
+            sizes="(max-width: 768px) 100vw, 42vw"
+            priority
+          />
+        </div>
       </motion.div>
     </div>
   </section>
