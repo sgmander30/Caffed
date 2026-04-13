@@ -29,7 +29,7 @@ import { PRODUCTS } from "../components/products";
 function getHeroImageSrc() {
   const fromEnv = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim();
   if (fromEnv) return fromEnv;
-  return "/caffed-protein-hero.jpg";
+  return "/newhero.jpg";
 }
 
 function isAbsoluteImageUrl(src) {
