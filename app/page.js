@@ -20,13 +20,13 @@ import {
 import CaffedLogo from "../components/CaffedLogo";
 
 /**
- * Hero photo: replace `public/hero-caffed.jpg` with your file, or set env
- * NEXT_PUBLIC_HERO_IMAGE=https://... to a hosted copy (no code change).
+ * Hero: default `public/caffed-protein-hero.jpg` (replace that file with your export),
+ * or set NEXT_PUBLIC_HERO_IMAGE=https://... to a hosted image.
  */
 function getHeroImageSrc() {
   const fromEnv = process.env.NEXT_PUBLIC_HERO_IMAGE?.trim();
   if (fromEnv) return fromEnv;
-  return "/hero-caffed.jpg";
+  return "/caffed-protein-hero.jpg";
 }
 
 function isAbsoluteImageUrl(src) {
