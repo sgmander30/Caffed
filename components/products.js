@@ -10,7 +10,7 @@ export const PRODUCTS = [
       "/products/choc-pb-box.png",
       "/products/PB3.jpg",
       "/PB4.jpg",
-      "/PB Label.jpg",
+      "/pbnewlabel.jpg",
     ],
     tagline: "The classic combo. Supercharged.",
     description:
@@ -43,7 +43,8 @@ export const PRODUCTS = [
     images: [
       "/products/rich-choc-box.png",
       "/products/Choc4.jpg",
-      "/products/rich-choc-bar.png",
+      "/ChocLabel.jpg",
+      "/ChocGym.jpg",
     ],
     tagline: "Dark, bold, and unstoppable.",
     description:
@@ -76,7 +77,7 @@ export const PRODUCTS = [
     images: [
       "/products/cinnamon-box.png",
       "/products/cinwrap.jpg",
-      "/products/cinnamon-bar.png",
+      "/cinlabel.jpg",
     ],
     tagline: "Warm spice. Cold gains.",
     description:
