@@ -153,7 +153,7 @@ const Hero = () => {
           transition={{ duration: 0.85 }}
           className="order-1 w-full lg:order-2 lg:col-span-7 xl:col-span-7"
         >
-          <div className="relative mx-auto w-full max-w-[min(100%,420px)] lg:ml-auto lg:mr-0 lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-[min(100%,340px)] lg:ml-auto lg:mr-0 lg:max-w-[82%]">
             <div className="pointer-events-none absolute inset-0 -z-10 scale-105 rounded-full bg-brand-gold/12 blur-[90px]" />
             <div className="relative z-10 aspect-[3/4] w-full overflow-hidden rounded-lg shadow-[0_28px_50px_rgba(200,168,78,0.2)] sm:rounded-xl">
               {heroRemote ? (
