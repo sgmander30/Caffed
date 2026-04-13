@@ -9,7 +9,8 @@ export const PRODUCTS = [
     images: [
       "/products/choc-pb-box.png",
       "/products/PB3.jpg",
-      "/products/choc-pb-bar.png",
+      "/PB4.jpg",
+      "/PB Label.jpg",
     ],
     tagline: "The classic combo. Supercharged.",
     description:
