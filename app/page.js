@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ShoppingBag,
@@ -11,18 +11,20 @@ import {
   Dumbbell,
   Leaf,
   CheckCircle2,
-  Globe,
-  MessageCircle,
+  Camera,
+  Bird,
   ArrowRight,
 } from "lucide-react";
+
+// --- COMPONENTS ---
 
 const AnnouncementBar = () => (
   <div className="overflow-hidden whitespace-nowrap border-b border-brand-gold/20 bg-brand-black py-2">
     <div className="flex animate-marquee">
       {[...Array(4)].map((_, i) => (
         <span key={i} className="mx-8 font-heading text-xs uppercase tracking-widest text-brand-gold">
-          Free shipping on orders over $50 • 100mg caffeine per bar • 20g protein, low sugar • Fuel
-          your grind
+          Free shipping on orders over $50 • 100mg caffeine per bar • 20g protein, low sugar • Fuel your
+          grind
         </span>
       ))}
     </div>
@@ -80,7 +82,7 @@ const Navbar = () => {
 
 const Hero = () => (
   <section className="relative flex min-h-[90vh] items-center overflow-hidden pt-20">
-    <div className="absolute inset-0 bg-radial-gradient opacity-50" />
+    <div className="absolute inset-0 bg-radial-gradient from-brand-gold/10 to-transparent opacity-50" />
     <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 md:grid-cols-2">
       <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -96,9 +98,7 @@ const Hero = () => (
             CAFFEINE
           </span>
         </h2>
-        <p className="mb-8 text-xl font-medium text-brand-goldLight">
-          20g Protein · 100mg Caffeine · Low Sugar
-        </p>
+        <p className="mb-8 text-xl font-medium text-brand-goldLight">20g Protein · 100mg Caffeine · Low Sugar</p>
         <button className="bg-brand-gold px-10 py-4 font-heading font-bold text-brand-black transition-transform hover:bg-brand-goldLight active:scale-95">
           SHOP NOW
         </button>
@@ -182,9 +182,7 @@ const StatsStrip = () => (
           initial={{ opacity: 0, y: 20 }}
           className="group text-center"
         >
-          <div className="mb-4 flex justify-center text-brand-gold transition group-hover:scale-110">
-            {stat.icon}
-          </div>
+          <div className="mb-4 flex justify-center text-brand-gold transition group-hover:scale-110">{stat.icon}</div>
           <h4 className="mb-1 text-3xl font-black uppercase tracking-tighter text-white">{stat.val}</h4>
           <p className="font-heading text-xs uppercase tracking-widest text-brand-gold">{stat.label}</p>
         </motion.div>
@@ -207,7 +205,7 @@ const Footer = () => (
         <ul className="space-y-3 text-sm font-medium text-gray-400">
           <li className="cursor-pointer transition hover:text-brand-gold">Protein Bars</li>
           <li className="cursor-pointer transition hover:text-brand-gold">Variety Packs</li>
-          <li className="cursor-pointer transition hover:text-brand-gold">Subscribe &amp; Save</li>
+          <li className="cursor-pointer transition hover:text-brand-gold">Subscribe & Save</li>
         </ul>
       </div>
       <div>
@@ -231,8 +229,8 @@ const Footer = () => (
           </button>
         </div>
         <div className="mt-6 flex space-x-4 text-brand-gold">
-          <Globe size={20} className="cursor-pointer" />
-          <MessageCircle size={20} className="cursor-pointer" />
+          <Camera size={20} className="cursor-pointer" aria-hidden />
+          <Bird size={20} className="cursor-pointer" aria-hidden />
         </div>
       </div>
     </div>
@@ -249,6 +247,7 @@ export default function Home() {
       <Navbar />
       <Hero />
 
+      {/* Category Icon Row */}
       <section className="overflow-x-auto bg-brand-black py-12">
         <div className="flex min-w-max justify-center space-x-8 px-6">
           {["Protein Bars", "Variety Pack", "Merch", "Subscribers"].map((cat) => (
@@ -262,16 +261,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Marquee Divider */}
       <div className="overflow-hidden border-y border-brand-black bg-brand-gold py-3">
         <div className="flex animate-marquee-fast">
           {[...Array(6)].map((_, i) => (
-            <span key={i} className="mx-10 whitespace-nowrap text-2xl font-black uppercase tracking-tighter text-brand-black">
+            <span
+              key={i}
+              className="mx-10 whitespace-nowrap text-2xl font-black uppercase tracking-tighter text-brand-black"
+            >
               20G PROTEIN · 100MG CAFFEINE · LOW SUGAR · FUEL YOUR GRIND
             </span>
           ))}
         </div>
       </div>
 
+      {/* Product Grid */}
       <section className="mx-auto max-w-7xl px-6 py-24">
         <div className="mb-16 flex flex-col items-center">
           <h2 className="mb-2 font-heading text-4xl font-black uppercase text-white">Our Bars</h2>
@@ -311,13 +315,12 @@ export default function Home() {
 
       <StatsStrip />
 
+      {/* Review Section */}
       <section className="overflow-hidden bg-brand-deep py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 flex items-end justify-between">
             <div>
-              <h2 className="mb-4 font-heading text-3xl font-black uppercase text-white">
-                What People Are Saying
-              </h2>
+              <h2 className="mb-4 font-heading text-3xl font-black uppercase text-white">What People Are Saying</h2>
               <div className="flex items-center space-x-2 text-brand-gold">
                 <span className="text-2xl font-bold">4.8 / 5</span>
                 <div className="flex">
