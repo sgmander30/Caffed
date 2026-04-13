@@ -36,7 +36,7 @@ export const PRODUCTS = [
     slug: "rich-chocolate",
     name: "Rich Chocolate",
     price: "34.99",
-    status: "Coming Soon",
+    status: "New",
     img1: "/products/rich-choc-box.png",
     img2: "/products/Choc4.jpg",
     images: [
@@ -69,7 +69,7 @@ export const PRODUCTS = [
     slug: "cinnamon",
     name: "Cinnamon",
     price: "34.99",
-    status: "Coming Soon",
+    status: "New",
     img1: "/products/cinnamon-box.png",
     img2: "/products/cinwrap.jpg",
     images: [
