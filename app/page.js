@@ -79,7 +79,11 @@ const Navbar = () => {
 
         <div className="flex flex-col items-center">
           <h1 className="m-0 p-0">
-            <CaffedLogo variant="nav" />
+            <img
+              src="/logo.jpg"
+              alt="Caffed Protein"
+              className="h-12 w-auto object-contain"
+            />
           </h1>
         </div>
 
@@ -241,7 +245,11 @@ const Footer = () => (
     <div className="mx-auto mb-16 grid max-w-7xl gap-12 px-6 md:grid-cols-4">
       <div>
         <div className="mb-6">
-          <CaffedLogo variant="footer" />
+          <img
+            src="/logo.jpg"
+            alt="Caffed Protein"
+            className="h-16 w-auto object-contain"
+          />
         </div>
         <p className="text-sm leading-relaxed text-gray-400">
           Fueling the modern grind with premium protein and clean caffeine.
