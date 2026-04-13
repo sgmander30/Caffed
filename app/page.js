@@ -1,69 +1,370 @@
-import FeatureCard from "../components/FeatureCard";
+"use client";
 
-const features = [
-  {
-    title: "Single-Origin Beans",
-    description: "Carefully sourced lots from small farms, roasted to highlight origin character.",
-  },
-  {
-    title: "Luxury Atmosphere",
-    description: "A modern, intimate experience with warm lighting and premium service.",
-  },
-  {
-    title: "Crafted Daily",
-    description: "From espresso to pour-over, every cup is dialed in by trained baristas.",
-  },
-];
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ShoppingBag,
+  Menu,
+  Search,
+  Star,
+  Bolt,
+  Dumbbell,
+  Leaf,
+  CheckCircle2,
+  Globe,
+  MessageCircle,
+  ArrowRight,
+} from "lucide-react";
 
-const marqueeWords = [
-  "SPECIALTY COFFEE",
-  "SMALL-BATCH ROASTS",
-  "LIMITED RELEASES",
-  "ARTISAN PASTRIES",
-];
+const AnnouncementBar = () => (
+  <div className="overflow-hidden whitespace-nowrap border-b border-brand-gold/20 bg-brand-black py-2">
+    <div className="flex animate-marquee">
+      {[...Array(4)].map((_, i) => (
+        <span key={i} className="mx-8 font-heading text-xs uppercase tracking-widest text-brand-gold">
+          Free shipping on orders over $50 • 100mg caffeine per bar • 20g protein, low sugar • Fuel
+          your grind
+        </span>
+      ))}
+    </div>
+  </div>
+);
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-brand-gold/30 bg-brand-black/80 py-3 backdrop-blur-md"
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+        <div className="hidden space-x-8 font-heading text-sm tracking-wider text-white md:flex">
+          <a href="#" className="transition hover:text-brand-gold">
+            SHOP
+          </a>
+          <a href="#" className="transition hover:text-brand-gold">
+            ABOUT
+          </a>
+        </div>
+        <button className="text-brand-gold md:hidden">
+          <Menu />
+        </button>
+
+        <div className="flex flex-col items-center">
+          <h1 className="flex items-center text-3xl font-black tracking-tighter text-brand-gold">
+            CAFFED <Bolt className="ml-1 h-6 w-6 fill-brand-gold" />
+          </h1>
+        </div>
+
+        <div className="flex items-center space-x-5 text-white">
+          <Search className="h-5 w-5 cursor-pointer transition hover:text-brand-gold" />
+          <div className="group relative cursor-pointer">
+            <ShoppingBag className="h-5 w-5 transition group-hover:text-brand-gold" />
+            <span className="absolute -right-2 -top-2 rounded-full bg-brand-gold px-1.5 text-[10px] font-bold text-brand-black">
+              0
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+const Hero = () => (
+  <section className="relative flex min-h-[90vh] items-center overflow-hidden pt-20">
+    <div className="absolute inset-0 bg-radial-gradient opacity-50" />
+    <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 md:grid-cols-2">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <span className="mb-4 block font-heading text-sm tracking-[0.3em] text-brand-gold">
+          THE ORIGINAL CAFFEINATED PROTEIN BAR
+        </span>
+        <h2 className="mb-6 text-6xl font-black leading-none text-white md:text-8xl">
+          PROTEIN <br /> MEETS <br />{" "}
+          <span className="bg-gradient-to-r from-brand-gold to-brand-goldLight bg-clip-text text-transparent">
+            CAFFEINE
+          </span>
+        </h2>
+        <p className="mb-8 text-xl font-medium text-brand-goldLight">
+          20g Protein · 100mg Caffeine · Low Sugar
+        </p>
+        <button className="bg-brand-gold px-10 py-4 font-heading font-bold text-brand-black transition-transform hover:bg-brand-goldLight active:scale-95">
+          SHOP NOW
+        </button>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="relative"
+      >
+        <div className="absolute inset-0 rounded-full bg-brand-gold/20 blur-[120px]" />
+        <img
+          src="https://images.unsplash.com/photo-1611703182699-35b31541a64b?q=80&w=1000&auto=format&fit=crop"
+          alt="Caffed Protein Bar Box and Single Bar"
+          className="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(200,168,78,0.3)]"
+        />
+      </motion.div>
+    </div>
+  </section>
+);
+
+const ProductCard = ({ name, price, status, img1, img2 }) => {
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      className="group cursor-pointer"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <div className="relative mb-4 aspect-square overflow-hidden border border-transparent bg-brand-charcoal transition-all group-hover:border-brand-gold/30">
+        {status && (
+          <span className="absolute left-4 top-4 z-20 bg-brand-gold px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-black">
+            {status}
+          </span>
+        )}
+        <img
+          src={img1}
+          alt={name}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            hover ? "opacity-0" : "opacity-100"
+          }`}
+        />
+        <img
+          src={img2}
+          alt={name}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            hover ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
+          <button className="w-full bg-white py-3 font-heading text-xs font-bold text-brand-black transition hover:bg-brand-gold">
+            QUICK ADD +
+          </button>
+        </div>
+      </div>
+      <h3 className="mb-1 font-heading uppercase tracking-wide text-white">{name}</h3>
+      <div className="flex items-center justify-between">
+        <p className="font-bold text-brand-gold">${price}</p>
+        <div className="flex text-brand-gold">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={12} fill="currentColor" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StatsStrip = () => (
+  <section className="border-y border-brand-gold/20 bg-brand-black py-20">
+    <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 px-6 md:grid-cols-4">
+      {[
+        { icon: <Dumbbell />, val: "20g", label: "Protein" },
+        { icon: <Bolt />, val: "100mg", label: "Caffeine" },
+        { icon: <Leaf />, val: "Low", label: "Sugar" },
+        { icon: <CheckCircle2 />, val: "Clean", label: "Ingredients" },
+      ].map((stat, i) => (
+        <motion.div
+          key={i}
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          className="group text-center"
+        >
+          <div className="mb-4 flex justify-center text-brand-gold transition group-hover:scale-110">
+            {stat.icon}
+          </div>
+          <h4 className="mb-1 text-3xl font-black uppercase tracking-tighter text-white">{stat.val}</h4>
+          <p className="font-heading text-xs uppercase tracking-widest text-brand-gold">{stat.label}</p>
+        </motion.div>
+      ))}
+    </div>
+  </section>
+);
+
+const Footer = () => (
+  <footer className="border-t border-brand-gold/10 bg-brand-black pb-10 pt-20">
+    <div className="mx-auto mb-16 grid max-w-7xl gap-12 px-6 md:grid-cols-4">
+      <div>
+        <h2 className="mb-6 text-2xl font-black text-brand-gold">CAFFED</h2>
+        <p className="text-sm leading-relaxed text-gray-400">
+          Fueling the modern grind with premium protein and clean caffeine.
+        </p>
+      </div>
+      <div>
+        <h4 className="mb-6 font-heading text-xs tracking-widest text-white">SHOP</h4>
+        <ul className="space-y-3 text-sm font-medium text-gray-400">
+          <li className="cursor-pointer transition hover:text-brand-gold">Protein Bars</li>
+          <li className="cursor-pointer transition hover:text-brand-gold">Variety Packs</li>
+          <li className="cursor-pointer transition hover:text-brand-gold">Subscribe &amp; Save</li>
+        </ul>
+      </div>
+      <div>
+        <h4 className="mb-6 font-heading text-xs tracking-widest text-white">SUPPORT</h4>
+        <ul className="space-y-3 text-sm font-medium text-gray-400">
+          <li className="cursor-pointer transition hover:text-brand-gold">Shipping Policy</li>
+          <li className="cursor-pointer transition hover:text-brand-gold">Returns</li>
+          <li className="cursor-pointer transition hover:text-brand-gold">FAQ</li>
+        </ul>
+      </div>
+      <div>
+        <h4 className="mb-6 font-heading text-xs tracking-widest text-white">JOIN THE GRIND</h4>
+        <div className="flex border-b border-brand-gold/50 pb-2">
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="w-full border-none bg-transparent text-sm text-white focus:outline-none"
+          />
+          <button>
+            <ArrowRight size={18} className="text-brand-gold" />
+          </button>
+        </div>
+        <div className="mt-6 flex space-x-4 text-brand-gold">
+          <Globe size={20} className="cursor-pointer" />
+          <MessageCircle size={20} className="cursor-pointer" />
+        </div>
+      </div>
+    </div>
+    <div className="text-center text-[10px] uppercase tracking-widest text-gray-600">
+      © 2026 CAFFED. CO-PACKED BY ELEMENT BARS CHICAGO.
+    </div>
+  </footer>
+);
 
 export default function Home() {
   return (
-    <main>
-      <section className="mx-auto max-w-6xl px-6 pb-20 pt-16">
-        <div className="rounded-3xl border border-brand-charcoal bg-brand-deep/60 p-8 md:p-12">
-          <p className="font-heading tracking-[0.24em] text-brand-gold">CAFFED</p>
-          <h1 className="mt-4 max-w-3xl font-heading text-4xl uppercase leading-tight text-white md:text-6xl">
-            Coffee crafted with precision and character.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base text-zinc-300 md:text-lg">
-            Build your next coffee brand presence with an elevated visual identity and a bold dark
-            palette powered by Tailwind CSS.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <button className="rounded-full bg-brand-gold px-6 py-3 text-sm font-semibold uppercase text-brand-black transition hover:bg-brand-goldLight">
-              Explore Menu
-            </button>
-            <button className="rounded-full border border-brand-gold px-6 py-3 text-sm font-semibold uppercase text-brand-gold transition hover:bg-brand-gold hover:text-brand-black">
-              Book a Table
-            </button>
+    <main className="min-h-screen bg-brand-deep selection:bg-brand-gold selection:text-brand-black">
+      <AnnouncementBar />
+      <Navbar />
+      <Hero />
+
+      <section className="overflow-x-auto bg-brand-black py-12">
+        <div className="flex min-w-max justify-center space-x-8 px-6">
+          {["Protein Bars", "Variety Pack", "Merch", "Subscribers"].map((cat) => (
+            <div key={cat} className="group flex cursor-pointer flex-col items-center space-y-3">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-brand-gold/30 transition-all duration-300 group-hover:bg-brand-gold">
+                <Bolt className="text-brand-gold group-hover:text-brand-black" />
+              </div>
+              <span className="font-heading text-[10px] uppercase tracking-widest text-white">{cat}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="overflow-hidden border-y border-brand-black bg-brand-gold py-3">
+        <div className="flex animate-marquee-fast">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="mx-10 whitespace-nowrap text-2xl font-black uppercase tracking-tighter text-brand-black">
+              20G PROTEIN · 100MG CAFFEINE · LOW SUGAR · FUEL YOUR GRIND
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <div className="mb-16 flex flex-col items-center">
+          <h2 className="mb-2 font-heading text-4xl font-black uppercase text-white">Our Bars</h2>
+          <div className="h-1 w-20 bg-brand-gold" />
+        </div>
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <ProductCard
+            name="Chocolate Peanut Butter"
+            price="36.99"
+            status="Best Seller"
+            img1="https://images.unsplash.com/photo-1590085011111-2f3068e820f1?auto=format&fit=crop&q=80&w=600"
+            img2="https://images.unsplash.com/photo-1568241723642-94f387c93248?auto=format&fit=crop&q=80&w=600"
+          />
+          <ProductCard
+            name="Mocha Crunch"
+            price="36.99"
+            status="Coming Soon"
+            img1="https://images.unsplash.com/photo-1582176604447-aa5144675a69?auto=format&fit=crop&q=80&w=600"
+            img2="https://images.unsplash.com/photo-1611703182699-35b31541a64b?auto=format&fit=crop&q=80&w=600"
+          />
+          <ProductCard
+            name="Vanilla Espresso"
+            price="36.99"
+            status="Coming Soon"
+            img1="https://images.unsplash.com/photo-1622484211148-7169ac870716?auto=format&fit=crop&q=80&w=600"
+            img2="https://images.unsplash.com/photo-1582176604447-aa5144675a69?auto=format&fit=crop&q=80&w=600"
+          />
+          <ProductCard
+            name="Variety Pack"
+            price="39.99"
+            status="New"
+            img1="https://images.unsplash.com/photo-1568241723642-94f387c93248?auto=format&fit=crop&q=80&w=600"
+            img2="https://images.unsplash.com/photo-1590085011111-2f3068e820f1?auto=format&fit=crop&q=80&w=600"
+          />
+        </div>
+      </section>
+
+      <StatsStrip />
+
+      <section className="overflow-hidden bg-brand-deep py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-12 flex items-end justify-between">
+            <div>
+              <h2 className="mb-4 font-heading text-3xl font-black uppercase text-white">
+                What People Are Saying
+              </h2>
+              <div className="flex items-center space-x-2 text-brand-gold">
+                <span className="text-2xl font-bold">4.8 / 5</span>
+                <div className="flex">
+                  <Star fill="currentColor" size={16} />
+                  <Star fill="currentColor" size={16} />
+                  <Star fill="currentColor" size={16} />
+                  <Star fill="currentColor" size={16} />
+                  <Star fill="currentColor" size={16} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex snap-x space-x-6 overflow-x-auto pb-8">
+            {[
+              {
+                text: "Finally, a protein bar that actually wakes me up AND tastes good. Game changer.",
+                author: "Alex R.",
+              },
+              {
+                text: "I replaced my morning coffee with one of these before the gym. The energy is unreal.",
+                author: "Jordan M.",
+              },
+              {
+                text: "20g of protein AND caffeine? Why hasn't anyone done this before?",
+                author: "Taylor S.",
+              },
+            ].map((rev, i) => (
+              <div
+                key={i}
+                className="min-w-[300px] snap-center border-l-4 border-brand-gold bg-brand-charcoal p-8 md:min-w-[400px]"
+              >
+                <div className="mb-4 flex text-brand-gold">
+                  <Star size={14} fill="currentColor" /> <Star size={14} fill="currentColor" />{" "}
+                  <Star size={14} fill="currentColor" /> <Star size={14} fill="currentColor" />{" "}
+                  <Star size={14} fill="currentColor" />
+                </div>
+                <p className="mb-6 leading-relaxed text-white italic">&quot;{rev.text}&quot;</p>
+                <p className="font-heading text-xs uppercase tracking-widest text-brand-gold">
+                  {rev.author} — <span className="text-gray-500">Verified Customer</span>
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="overflow-hidden border-y border-brand-charcoal bg-brand-black py-4">
-        <div className="animate-marquee-fast whitespace-nowrap">
-          {[...marqueeWords, ...marqueeWords].map((item, idx) => (
-            <span key={`${item}-${idx}`} className="mx-6 font-heading text-sm tracking-[0.2em] text-brand-goldMuted">
-              {item}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="font-heading text-3xl text-brand-goldLight md:text-4xl">Why choose Caffed</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {features.map((feature) => (
-            <FeatureCard key={feature.title} title={feature.title} description={feature.description} />
-          ))}
-        </div>
-      </section>
+      <Footer />
     </main>
   );
 }
