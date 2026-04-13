@@ -82,7 +82,7 @@ const Navbar = () => {
             <img
               src="/logonobg.png"
               alt="Caffed Protein"
-              className="h-12 w-auto object-contain"
+              className="h-20 w-auto object-contain"
             />
           </h1>
         </div>
