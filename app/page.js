@@ -20,6 +20,7 @@ import {
 
 import CaffedLogo from "../components/CaffedLogo";
 import { useCart } from "../components/CartContext";
+import { PRODUCTS } from "../components/products";
 
 /**
  * Hero: default `public/caffed-protein-hero.jpg` (replace that file with your export),
@@ -185,12 +186,13 @@ const Hero = () => {
   );
 };
 
-const ProductCard = ({ name, price, status, img1, img2 }) => {
+const ProductCard = ({ slug, name, price, status, img1, img2 }) => {
   const [hover, setHover] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     addItem({ name, price, img1, img2 });
     setAdded(true);
     setTimeout(() => setAdded(false), 1200);
@@ -202,40 +204,46 @@ const ProductCard = ({ name, price, status, img1, img2 }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="relative mb-4 aspect-square overflow-hidden border border-transparent bg-brand-charcoal transition-all group-hover:border-brand-gold/30">
-        {status && (
-          <span className="absolute left-4 top-4 z-20 bg-brand-gold px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-black">
-            {status}
-          </span>
-        )}
-        <img
-          src={img1}
-          alt={name}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            hover ? "opacity-0" : "opacity-100"
-          }`}
-        />
-        <img
-          src={img2}
-          alt={name}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            hover ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
-          <button
-            onClick={handleAdd}
-            className={`w-full py-3 font-heading text-xs font-bold transition ${
-              added
-                ? "bg-brand-gold text-brand-black"
-                : "bg-white text-brand-black hover:bg-brand-gold"
+      <Link href={`/products/${slug}`}>
+        <div className="relative mb-4 aspect-square overflow-hidden border border-transparent bg-brand-charcoal transition-all group-hover:border-brand-gold/30">
+          {status && (
+            <span className="absolute left-4 top-4 z-20 bg-brand-gold px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-black">
+              {status}
+            </span>
+          )}
+          <img
+            src={img1}
+            alt={name}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+              hover ? "opacity-0" : "opacity-100"
             }`}
-          >
-            {added ? "ADDED ✓" : "QUICK ADD +"}
-          </button>
+          />
+          <img
+            src={img2}
+            alt={name}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+              hover ? "opacity-100" : "opacity-0"
+            }`}
+          />
+          <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
+            <button
+              onClick={handleAdd}
+              className={`w-full py-3 font-heading text-xs font-bold transition ${
+                added
+                  ? "bg-brand-gold text-brand-black"
+                  : "bg-white text-brand-black hover:bg-brand-gold"
+              }`}
+            >
+              {added ? "ADDED ✓" : "QUICK ADD +"}
+            </button>
+          </div>
         </div>
-      </div>
-      <h3 className="mb-1 font-heading uppercase tracking-wide text-white">{name}</h3>
+      </Link>
+      <Link href={`/products/${slug}`}>
+        <h3 className="mb-1 font-heading uppercase tracking-wide text-white transition hover:text-brand-gold">
+          {name}
+        </h3>
+      </Link>
       <div className="flex items-center justify-between">
         <p className="font-bold text-brand-gold">${price}</p>
         <div className="flex text-brand-gold">
@@ -340,27 +348,9 @@ export default function Home() {
           <div className="h-1 w-20 bg-brand-gold" />
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 md:grid-cols-3">
-          <ProductCard
-            name="Chocolate Peanut Butter"
-            price="34.99"
-            status="Best Seller"
-            img1="/products/choc-pb-box.png"
-            img2="/products/choc-pb-bar.png"
-          />
-          <ProductCard
-            name="Rich Chocolate"
-            price="34.99"
-            status="Coming Soon"
-            img1="/products/rich-choc-box.png"
-            img2="/products/rich-choc-bar.png"
-          />
-          <ProductCard
-            name="Cinnamon"
-            price="34.99"
-            status="Coming Soon"
-            img1="/products/cinnamon-box.png"
-            img2="/products/cinnamon-bar.png"
-          />
+          {PRODUCTS.map((p) => (
+            <ProductCard key={p.slug} {...p} />
+          ))}
         </div>
       </section>
 
