@@ -16,6 +16,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+import CaffedLogo from "../components/CaffedLogo";
+
 // --- COMPONENTS ---
 
 const AnnouncementBar = () => (
@@ -61,8 +63,8 @@ const Navbar = () => {
         </button>
 
         <div className="flex flex-col items-center">
-          <h1 className="flex items-center text-3xl font-black tracking-tighter text-brand-gold">
-            CAFFED <Bolt className="ml-1 h-6 w-6 fill-brand-gold" />
+          <h1 className="m-0 p-0">
+            <CaffedLogo variant="nav" />
           </h1>
         </div>
 
@@ -195,7 +197,9 @@ const Footer = () => (
   <footer className="border-t border-brand-gold/10 bg-brand-black pb-10 pt-20">
     <div className="mx-auto mb-16 grid max-w-7xl gap-12 px-6 md:grid-cols-4">
       <div>
-        <h2 className="mb-6 text-2xl font-black text-brand-gold">CAFFED</h2>
+        <div className="mb-6">
+          <CaffedLogo variant="footer" />
+        </div>
         <p className="text-sm leading-relaxed text-gray-400">
           Fueling the modern grind with premium protein and clean caffeine.
         </p>
