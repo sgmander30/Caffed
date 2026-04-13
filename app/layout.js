@@ -1,4 +1,5 @@
 import "./globals.css";
+import { CartProvider } from "../components/CartContext";
 
 export const metadata = {
   title: "Caffed | Premium Coffee Experience",
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-brand-black text-white font-body antialiased">{children}</body>
+      <body className="bg-brand-black text-white font-body antialiased">
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   );
 }

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ShoppingBag,
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 
 import CaffedLogo from "../components/CaffedLogo";
+import { useCart } from "../components/CartContext";
 
 /**
  * Hero: default `public/caffed-protein-hero.jpg` (replace that file with your export),
@@ -63,6 +65,7 @@ const AnnouncementBar = () => (
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { totalItems } = useCart();
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -102,12 +105,12 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-5 text-white">
           <Search className="h-5 w-5 cursor-pointer transition hover:text-brand-gold" />
-          <div className="group relative cursor-pointer">
+          <Link href="/cart" className="group relative cursor-pointer">
             <ShoppingBag className="h-5 w-5 transition group-hover:text-brand-gold" />
             <span className="absolute -right-2 -top-2 rounded-full bg-brand-gold px-1.5 text-[10px] font-bold text-brand-black">
-              0
+              {totalItems}
             </span>
-          </div>
+          </Link>
         </div>
       </div>
     </nav>
@@ -184,6 +187,15 @@ const Hero = () => {
 
 const ProductCard = ({ name, price, status, img1, img2 }) => {
   const [hover, setHover] = useState(false);
+  const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
+
+  const handleAdd = () => {
+    addItem({ name, price, img1, img2 });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
+  };
+
   return (
     <div
       className="group cursor-pointer"
@@ -211,8 +223,15 @@ const ProductCard = ({ name, price, status, img1, img2 }) => {
           }`}
         />
         <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
-          <button className="w-full bg-white py-3 font-heading text-xs font-bold text-brand-black transition hover:bg-brand-gold">
-            QUICK ADD +
+          <button
+            onClick={handleAdd}
+            className={`w-full py-3 font-heading text-xs font-bold transition ${
+              added
+                ? "bg-brand-gold text-brand-black"
+                : "bg-white text-brand-black hover:bg-brand-gold"
+            }`}
+          >
+            {added ? "ADDED ✓" : "QUICK ADD +"}
           </button>
         </div>
       </div>
