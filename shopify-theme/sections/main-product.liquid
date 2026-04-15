@@ -1,0 +1,137 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="c-section">
+  <div class="c-container">
+    <div class="c-grid c-grid--product">
+      <div>
+        <div class="c-card c-card--media">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              width="1200"
+              height="{{ 1200 | divided_by: product.featured_image.aspect_ratio | round }}"
+              loading="eager"
+              class="c-media"
+            >
+          {%- else -%}
+            <div class="c-media c-media--placeholder"></div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div>
+        <p class="c-kicker">{{ section.settings.kicker | escape }}</p>
+        <h1 class="c-h1">{{ product.title }}</h1>
+
+        {%- if section.settings.subcopy != blank -%}
+          <p class="c-subcopy">{{ section.settings.subcopy | escape }}</p>
+        {%- endif -%}
+
+        <div class="c-price-row">
+          <div class="c-price">{{ current_variant.price | money }}</div>
+          <div class="c-rating" aria-hidden="true">
+            ★★★★★
+          </div>
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="c-richtext">
+            {{ product.description }}
+          </div>
+        {%- endif -%}
+
+        <div class="c-badges">
+          {%- for b in section.blocks -%}
+            {%- if b.type == 'badge' -%}
+              <div class="c-badge">
+                <div class="c-badge__val">{{ b.settings.value | escape }}</div>
+                <div class="c-badge__label">{{ b.settings.label | escape }}</div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <product-form class="c-form" data-section-id="{{ section.id }}">
+          {%- form 'product', product, id: 'product-form-' | append: section.id -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+            {%- unless product.has_only_default_variant -%}
+              <div class="c-variants">
+                {%- for option in product.options_with_values -%}
+                  <label class="c-label">{{ option.name }}</label>
+                  <select class="c-select" name="options[{{ option.name | escape }}]">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+            <button
+              type="submit"
+              name="add"
+              class="c-btn c-btn--primary"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {{ section.settings.add_to_cart_label | escape }}
+              {%- else -%}
+                Sold out
+              {%- endif -%}
+            </button>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "THE ORIGINAL CAFFEINATED PROTEIN BAR"
+    },
+    {
+      "type": "text",
+      "id": "subcopy",
+      "label": "Subcopy",
+      "default": "20g Protein · 100mg Caffeine"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Stat badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "20g"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Protein"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6
+}
+{% endschema %}
+

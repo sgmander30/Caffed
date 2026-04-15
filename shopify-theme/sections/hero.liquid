@@ -1,0 +1,94 @@
+<section class="c-hero">
+  <div class="c-hero__bg"></div>
+  <div class="c-container c-hero__grid">
+    <div class="c-hero__copy">
+      {% if section.settings.kicker != blank %}
+        <div class="c-kicker">{{ section.settings.kicker }}</div>
+      {% endif %}
+      <h1 class="c-hero__title">
+        {{ section.settings.heading_line1 | escape }}<br>
+        {{ section.settings.heading_line2 | escape }}<br>
+        <span class="c-gradient-text">{{ section.settings.heading_highlight | escape }}</span>
+      </h1>
+      {% if section.settings.subheading != blank %}
+        <div class="c-hero__sub">{{ section.settings.subheading }}</div>
+      {% endif %}
+      {% if section.settings.cta_label != blank %}
+        <a class="c-btn c-btn--gold" href="{{ section.settings.cta_link }}">
+          {{ section.settings.cta_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="c-hero__media">
+      <div class="c-hero__glow"></div>
+      <div class="c-hero__imageWrap">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1400 | image_tag: class: 'c-hero__image', loading: 'eager', fetchpriority: 'high', alt: section.settings.image.alt | default: shop.name }}
+        {% else %}
+          <div class="c-hero__imagePlaceholder">
+            Add a hero image in the section settings.
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero (Caffed)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "THE ORIGINAL CAFFEINATED PROTEIN BAR"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "PROTEIN"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2",
+      "default": "MEETS"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading highlight",
+      "default": "CAFFEINE"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "20g Protein · 100mg Caffeine"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    }
+  ],
+  "presets": [
+    { "name": "Hero (Caffed)" }
+  ]
+}
+{% endschema %}
+

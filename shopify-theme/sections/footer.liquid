@@ -1,0 +1,120 @@
+<footer class="footer">
+  <div class="page-width footer__grid">
+    <div class="footer__col">
+      <a class="footer__logo" href="{{ routes.root_url }}">
+        {% if settings.logo != blank %}
+          {{ settings.logo | image_url: width: 240 | image_tag: widths: '120, 180, 240', alt: shop.name }}
+        {% else %}
+          <span class="footer__wordmark">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+      <p class="footer__blurb">{{ section.settings.blurb }}</p>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__title">{{ section.settings.shop_heading }}</h4>
+      {% if linklists[section.settings.shop_menu].links.size > 0 %}
+        <ul class="footer__links">
+          {% for link in linklists[section.settings.shop_menu].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__title">{{ section.settings.support_heading }}</h4>
+      {% if linklists[section.settings.support_menu].links.size > 0 %}
+        <ul class="footer__links">
+          {% for link in linklists[section.settings.support_menu].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__title">{{ section.settings.newsletter_heading }}</h4>
+      {% form 'customer', class: 'footer__newsletter' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="footer__newsletterRow">
+          <input
+            type="email"
+            name="contact[email]"
+            value="{{ form.email }}"
+            aria-label="{{ 'newsletter.label' | t }}"
+            placeholder="{{ section.settings.newsletter_placeholder }}"
+            required
+            class="footer__input"
+          >
+          <button class="footer__submit" type="submit" aria-label="{{ 'newsletter.button_label' | t }}">
+            →
+          </button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="footer__fineprint">
+    {{ section.settings.fineprint | escape }}
+  </div>
+
+  {% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "blurb",
+        "label": "Blurb",
+        "default": "Fueling the modern grind with premium protein and clean caffeine."
+      },
+      {
+        "type": "text",
+        "id": "shop_heading",
+        "label": "Shop heading",
+        "default": "SHOP"
+      },
+      {
+        "type": "link_list",
+        "id": "shop_menu",
+        "label": "Shop menu"
+      },
+      {
+        "type": "text",
+        "id": "support_heading",
+        "label": "Support heading",
+        "default": "SUPPORT"
+      },
+      {
+        "type": "link_list",
+        "id": "support_menu",
+        "label": "Support menu"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_heading",
+        "label": "Newsletter heading",
+        "default": "JOIN THE GRIND"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_placeholder",
+        "label": "Newsletter placeholder",
+        "default": "Email Address"
+      },
+      {
+        "type": "text",
+        "id": "fineprint",
+        "label": "Fine print",
+        "default": "© 2026 CAFFED. CO-PACKED BY ELEMENT BARS CHICAGO."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Footer"
+      }
+    ]
+  }
+  {% endschema %}
+</footer>
