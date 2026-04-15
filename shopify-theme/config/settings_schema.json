@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "announcement_items",
+        "label": "Announcement items (separate with |)",
+        "default": "Free Shipping On Orders Over $50|20G Protein|100mg Caffeine|Low Sugar|Fuel Your Grind"
+      },
+      {
+        "type": "color",
+        "id": "brand_black",
+        "label": "Brand black",
+        "default": "#0A0A0A"
+      },
+      {
+        "type": "color",
+        "id": "brand_deep",
+        "label": "Brand deep",
+        "default": "#0D0D0D"
+      },
+      {
+        "type": "color",
+        "id": "brand_charcoal",
+        "label": "Brand charcoal",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "brand_gold",
+        "label": "Brand gold",
+        "default": "#C8A84E"
+      },
+      {
+        "type": "color",
+        "id": "brand_gold_light",
+        "label": "Brand gold light",
+        "default": "#E8D48B"
+      }
+    ]
+  }
+]
+

@@ -1,0 +1,2 @@
+/* Compatibility shim: forward to main theme stylesheet. */
+@import url("./theme.css");

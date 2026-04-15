@@ -1,0 +1,64 @@
+<header class="c-header" data-header>
+  <div class="c-header__inner">
+    <nav class="c-header__nav c-header__nav--left" aria-label="Primary">
+      {%- if section.settings.menu != blank -%}
+        <ul class="c-header__menu">
+          {%- for link in section.settings.menu.links -%}
+            <li class="c-header__menu-item">
+              <a class="c-header__link" href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <div class="c-header__menu c-header__menu--placeholder">
+          <a class="c-header__link" href="/collections/all">Shop</a>
+          <a class="c-header__link" href="/pages/about">About</a>
+        </div>
+      {%- endif -%}
+    </nav>
+
+    <div class="c-header__brand">
+      <a class="c-header__brand-link" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 400 | image_tag: class: 'c-header__logo', loading: 'eager', alt: shop.name }}
+        {%- else -%}
+          <span class="c-header__wordmark">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <div class="c-header__actions">
+      <a class="c-header__icon-link" href="{{ routes.search_url }}" aria-label="Search">
+        <span class="c-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </a>
+      <a class="c-header__icon-link c-cart-link" href="{{ routes.cart_url }}" aria-label="Cart">
+        <span class="c-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <path d="M6 7h15l-1.5 13h-12L6 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M9 7a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="c-cart-link__count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}
+

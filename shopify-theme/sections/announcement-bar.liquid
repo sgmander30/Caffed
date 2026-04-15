@@ -1,0 +1,30 @@
+{%- liquid
+  assign items_raw = settings.announcement_items | default: ''
+  assign items = items_raw | split: '|'
+-%}
+
+{%- if items_raw != blank -%}
+  <div class="announcement">
+    <div class="announcement__track" aria-label="Announcements">
+      {%- for r in (1..4) -%}
+        {%- for item in items -%}
+          {%- assign trimmed = item | strip -%}
+          {%- if trimmed != blank -%}
+            <span class="announcement__item">{{ trimmed }}</span>
+            <span class="announcement__dot" aria-hidden="true">•</span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "tag": "section",
+  "class": "section-announcement",
+  "settings": []
+}
+{% endschema %}
+

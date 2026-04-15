@@ -1,0 +1,64 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+-%}
+
+<section class="section">
+  <div class="container">
+    <div class="section__title">
+      <h2 class="h2">{{ section.settings.heading | escape }}</h2>
+      <div class="rule"></div>
+    </div>
+
+    {%- if collection != blank and collection.products_count > 0 -%}
+      <div class="product-grid">
+        {%- for product in collection.products limit: section.settings.limit -%}
+          <a class="product-card" href="{{ product.url }}">
+            <div class="product-card__media">
+              {%- if section.settings.badge_text != blank -%}
+                <span class="badge">{{ section.settings.badge_text | escape }}</span>
+              {%- endif -%}
+
+              {%- assign img1 = product.featured_image -%}
+              {%- assign img2 = product.images[1] -%}
+              {%- if img1 != blank -%}
+                <img class="img img--primary" src="{{ img1 | image_url: width: 900 }}" alt="{{ img1.alt | escape }}" loading="lazy">
+              {%- endif -%}
+              {%- if img2 != blank -%}
+                <img class="img img--secondary" src="{{ img2 | image_url: width: 900 }}" alt="{{ img2.alt | escape }}" loading="lazy">
+              {%- endif -%}
+
+              <div class="product-card__cta">
+                <span class="btn btn--light btn--block">View</span>
+              </div>
+            </div>
+            <div class="product-card__meta">
+              <div class="product-card__name">{{ product.title }}</div>
+              <div class="product-card__row">
+                <div class="price">{{ product.price | money }}</div>
+                <div class="stars" aria-hidden="true">★★★★★</div>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty">
+        <p>Select a collection in the theme editor to show products here.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Bars" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 24, "step": 1, "default": 6 },
+    { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "default": "" }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}
+
