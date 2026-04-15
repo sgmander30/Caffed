@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
+    "retry": "node scripts/retry-command.mjs",
+    "shopify:retry": "node scripts/retry-command.mjs -- npx shopify",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"

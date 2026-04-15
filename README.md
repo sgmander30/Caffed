@@ -40,3 +40,19 @@ To publish:
 If your repo is `https://github.com/<username>/<repo>`, the site URL will be:
 
 `https://<username>.github.io/<repo>/`
+
+## Retrying Shopify CLI commands (same repo)
+
+If you run Shopify CLI commands and want simple retries **without re-cloning** (same working directory), use:
+
+```bash
+# Retries npx shopify <args...> up to 3 times (default)
+npm run shopify:retry -- theme push
+```
+
+Configuration (optional):
+
+```bash
+# 5 retries, exponential backoff starting at 2s (default) with multiplier 2 (default)
+RETRY_RETRIES=5 RETRY_BACKOFF_MS=2000 RETRY_BACKOFF_MULTIPLIER=2 npm run shopify:retry -- theme push
+```
