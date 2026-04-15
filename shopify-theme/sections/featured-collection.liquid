@@ -21,10 +21,10 @@
               {%- assign img1 = product.featured_image -%}
               {%- assign img2 = product.images[1] -%}
               {%- if img1 != blank -%}
-                <img class="img img--primary" src="{{ img1 | image_url: width: 900 }}" alt="{{ img1.alt | escape }}" loading="lazy">
+                {{ img1 | image_url: width: 900 | image_tag: class: 'img img--primary', loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 320px, 45vw' }}
               {%- endif -%}
               {%- if img2 != blank -%}
-                <img class="img img--secondary" src="{{ img2 | image_url: width: 900 }}" alt="{{ img2.alt | escape }}" loading="lazy">
+                {{ img2 | image_url: width: 900 | image_tag: class: 'img img--secondary', loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 320px, 45vw' }}
               {%- endif -%}
 
               <div class="product-card__cta">
@@ -56,7 +56,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Our Bars" },
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 24, "step": 1, "default": 6 },
-    { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "default": "" }
+    { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "default": "NEW" }
   ],
   "presets": [{ "name": "Featured collection" }]
 }

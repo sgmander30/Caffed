@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="container">
+    <div class="empty">
+      <h1 class="h2">{{ 'general.404.title' | t }}</h1>
+      <p>{{ 'general.404.subtext' | t }}</p>
+      <p><a class="btn btn--light" href="{{ routes.root_url }}">{{ 'general.404.link' | t }}</a></p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main 404",
+  "settings": [],
+  "presets": [{ "name": "Main 404" }]
+}
+{% endschema %}
+
