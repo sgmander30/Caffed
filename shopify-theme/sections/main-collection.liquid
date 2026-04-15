@@ -1,0 +1,53 @@
+{%- liquid
+  assign collection = collection
+-%}
+
+<section class="section">
+  <div class="container">
+    <header class="section__title">
+      <h1 class="h2">{{ collection.title }}</h1>
+      <div class="rule"></div>
+      {%- if collection.description != blank -%}
+        <div class="rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- if collection.products_count > 0 -%}
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          <a class="product-card" href="{{ product.url }}">
+            <div class="product-card__media">
+              {%- assign img1 = product.featured_image -%}
+              {%- if img1 != blank -%}
+                {{ img1 | image_url: width: 900 | image_tag: class: 'img img--primary', loading: 'lazy' }}
+              {%- endif -%}
+              <div class="product-card__cta">
+                <span class="btn btn--light btn--block">View</span>
+              </div>
+            </div>
+            <div class="product-card__meta">
+              <div class="product-card__name">{{ product.title }}</div>
+              <div class="product-card__row">
+                <div class="price">{{ product.price | money }}</div>
+                <div class="stars" aria-hidden="true">★★★★★</div>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty">
+        <p>No products found in this collection.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": [],
+  "presets": [{ "name": "Main collection" }]
+}
+{% endschema %}
+

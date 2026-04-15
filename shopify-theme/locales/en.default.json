@@ -1,0 +1,14 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "Sorry, we couldn’t find that page.",
+      "link": "Back to home"
+    }
+  },
+  "newsletter": {
+    "label": "Email",
+    "button_label": "Submit"
+  }
+}
+
