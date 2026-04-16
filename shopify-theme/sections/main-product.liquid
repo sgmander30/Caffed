@@ -52,37 +52,39 @@
           {%- endfor -%}
         </div>
 
-        <product-form class="c-form" data-section-id="{{ section.id }}">
-          {%- form 'product', product, id: 'product-form-' | append: section.id -%}
+        <form action="/cart/add" method="post" class="c-form">
+          {%- if product.has_only_default_variant -%}
             <input type="hidden" name="id" value="{{ current_variant.id }}">
-
-            {%- unless product.has_only_default_variant -%}
-              <div class="c-variants">
-                {%- for option in product.options_with_values -%}
-                  <label class="c-label">{{ option.name }}</label>
-                  <select class="c-select" name="options[{{ option.name | escape }}]">
-                    {%- for value in option.values -%}
-                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
-                    {%- endfor -%}
-                  </select>
+          {%- else -%}
+            <div class="c-variants">
+              <label class="c-label" for="variant-select-{{ section.id }}">Variant</label>
+              <select class="c-select" id="variant-select-{{ section.id }}" name="id">
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant.id == current_variant.id %}selected{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}
+                  >
+                    {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+                  </option>
                 {%- endfor -%}
-              </div>
-            {%- endunless -%}
+              </select>
+            </div>
+          {%- endif -%}
 
-            <button
-              type="submit"
-              name="add"
-              class="c-btn c-btn--primary"
-              {% unless current_variant.available %}disabled{% endunless %}
-            >
-              {%- if current_variant.available -%}
-                {{ section.settings.add_to_cart_label | escape }}
-              {%- else -%}
-                Sold out
-              {%- endif -%}
-            </button>
-          {%- endform -%}
-        </product-form>
+          <button
+            type="submit"
+            name="add"
+            class="c-btn c-btn--primary"
+            {% unless current_variant.available %}disabled{% endunless %}
+          >
+            {%- if current_variant.available -%}
+              {{ section.settings.add_to_cart_label | escape }}
+            {%- else -%}
+              Sold out
+            {%- endif -%}
+          </button>
+        </form>
       </div>
     </div>
   </div>
